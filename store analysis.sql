@@ -12,7 +12,7 @@ SELECT
         WHEN square_meters > 2000 THEN '> 2000'
     END AS size_bucket,
     ROUND(SUM(unit_price_usd * quantity),2) AS total_sales
-FROM overall
+FROM data_spark.overall
 GROUP BY size_bucket
 ORDER BY
     CASE
@@ -37,7 +37,7 @@ SELECT
         WHEN YEAR(CURDATE()) - YEAR(open_date) BETWEEN 16 AND 20 THEN '15 to 20'
     END AS store_age_bucket,
     ROUND(SUM(unit_price_usd * quantity), 2) AS total_sales
-FROM overall
+FROM data_spark.overall
 GROUP BY store_age_bucket
 ORDER BY store_age_bucket
 
@@ -46,7 +46,7 @@ SELECT
   storekey,Country,Continent,State,
   ROUND(SUM((unit_price_usd)*quantity),2) AS total_revenue_USD
 FROM
-  overall
+  data_spark.overall
 GROUP BY
   storekey,Country,Continent,State
 order by total_revenue_USD desc
