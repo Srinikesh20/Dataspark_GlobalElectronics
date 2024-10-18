@@ -1,7 +1,7 @@
 
 
 SELECT gender, COUNT(*) AS Count_gender
-FROM customers
+FROM data_spark.customers
 GROUP BY gender;
 
 -- Age bucketing
@@ -20,7 +20,7 @@ FROM (
             WHEN YEAR(STR_TO_DATE(Order_date, '%Y-%m-%d')) - YEAR(STR_TO_DATE(birthday, '%Y-%m-%d')) BETWEEN 55 AND 65 THEN '55-65'
             ELSE '>65'
         END AS age_bucket
-    FROM overall
+    FROM data_spark.overall
 ) AS age_groups
 GROUP BY age_bucket;
 
@@ -30,7 +30,7 @@ SELECT
     continent,country,state,city, 
     COUNT(CustomerKey) AS customer_count
 FROM 
-    CUSTOMERS
+    data_spark.CUSTOMERS
 GROUP BY 
     continent,country,state,city
 ORDER BY 
